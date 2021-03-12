@@ -30,7 +30,7 @@ def main():
 
 def listening():
     if(GPIO.input(Pin.Fork)):
-        if(GPIO.input(38)):
+        if(GPIO.input(Pin.Calling)):
             call()
         time.sleep(0.01)
         if(GPIO.input(Pin.Fork) == 0):
@@ -45,14 +45,14 @@ def call():
     y = ""
     z = 0
     while(True):
-        while(GPIO.input(38) == 1):
+        while(GPIO.input(Pin.Calling) == 1):
             z = 0
             if(GPIO.input(40) == 1):
                 time.sleep(0.02)
                 if(GPIO.input(40) == 0):
                     time.sleep(0.02)
                     x += 1
-            if(GPIO.input(38) == 0 and x != 0):
+            if(GPIO.input(Pin.Calling) == 0 and x != 0):
                 x %= 10
                 #print(x)
                 y += str(x)
