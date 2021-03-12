@@ -29,15 +29,15 @@ def main():
         listening()
 
 def listening():
-    if(GPIO.input(36)):
+    if(GPIO.input(Pin.Fork)):
         if(GPIO.input(38)):
             call()
         time.sleep(0.01)
-        if(GPIO.input(36) == 0):
+        if(GPIO.input(Pin.Fork) == 0):
            os.system('twinkle --cmd bye')
     else:
         time.sleep(0.01)
-        if(GPIO.input(36)):
+        if(GPIO.input(Pin.Fork)):
             os.system('twinkle --cmd answer')
 
 def call():
@@ -67,7 +67,7 @@ def call():
            z = 0
            main()
            #time.sleep(100)
-        if(GPIO.input(36) == 0):
+        if(GPIO.input(Pin.Fork) == 0):
             x = 0
             y = ""
             z = 0
