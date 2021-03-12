@@ -3,11 +3,10 @@
 import RPi.GPIO as GPIO
 import time
 import os
+from config import Config
 from pin import Pin
 from timeout import Timeout
 from utilities import read_from_file_is_not_ringing, write_is_ringing
-
-path = "/home/pi/TwinklePTT50/ring.txt"
 
 def setup():
     GPIO.setmode(GPIO.BOARD)
@@ -18,7 +17,7 @@ def setup():
     prepare()
 
 def prepare():
-    write_is_ringing(path)
+    write_is_ringing(Config.RING_FILE_PATH)
 
 def main():
     x = 0
@@ -27,12 +26,12 @@ def main():
     pause = 30#in ms
     
     while(True):
-        y = read_from_file_is_not_ringing(path)
+        y = read_from_file_is_not_ringing(Config.RING_FILE_PATH)
         time.sleep(Timeout.Short)
         GPIO.output(Pin.Ringing, 1)
 
         while(y):
-            y = read_from_file_is_not_ringing(path)
+            y = read_from_file_is_not_ringing(Config.RING_FILE_PATH)
             time.sleep(Timeout.Short)
             x += 1
             #print(x)
