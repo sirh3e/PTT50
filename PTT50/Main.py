@@ -53,7 +53,7 @@ def call():
         while(GPIO.input(Pin.Calling)):
             z = 0
             if(GPIO.input(Pin.Pulse)):
-                time.sleep(0.02)
+                time.sleep(Timeout.Long)
                 if(GPIO.input(Pin.Pulse) == 0):
                     time.sleep(Timeout.NotAny)
                     x += 1
@@ -63,7 +63,7 @@ def call():
                 y += str(x)
                 #print(y)
                 x = 0
-        time.sleep(0.02)
+        time.sleep(Timeout.Long)
         z += 1
         if((z >= 300 and len(y) >= 3) or len(y) > 9):
            os.system('twinkle --call ' + y)
