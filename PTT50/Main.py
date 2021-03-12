@@ -23,19 +23,18 @@ z = 0
 def main():
     while(True):
         listening()
-        
+
 def listening():
-    if(GPIO.input(36) == 0):
-        time.sleep(0.01)
-        if(GPIO.input(36) == 1):
-            os.system('twinkle --cmd answer')
-    if(GPIO.input(36) == 1):
-        if(GPIO.input(38) == 1):
+    if(GPIO.input(36)):
+        if(GPIO.input(38)):
             call()
         time.sleep(0.01)
         if(GPIO.input(36) == 0):
            os.system('twinkle --cmd bye')
-                
+    else:
+        time.sleep(0.01)
+        if(GPIO.input(36)):
+            os.system('twinkle --cmd answer')
 
 def call():
     x = 0
