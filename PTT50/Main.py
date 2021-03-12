@@ -7,11 +7,7 @@ import time
 import os
 from enum import Enum
 from pin import Pin
-
-class Timeout(Enum):
-    NotAny = 0.0
-    Short = 0.01
-    Long = 0.02
+from timeout import Timeout
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
