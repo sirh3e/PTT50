@@ -12,6 +12,10 @@ class Pin(Enum):
     Calling = 38 #Wählt
     Pulse = 40 #Gabel
 
+class Timeout(Enum):
+    Short = 0.01
+    Long = 0.02
+
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(Pin.Pulse, GPIO.IN)
