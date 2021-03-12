@@ -5,44 +5,52 @@ import time
 import os
 from pin import Pin
 from timeout import Timeout
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(Pin.Ringing, GPIO.OUT)
-GPIO.output(Pin.Ringing, 1)
+from utilities import write_is_ringing
 
 path = "/home/pi/TwinklePTT50/ring.txt"
 
-with open(path, "w") as file:
-    file.write("0")
-    file.flush()
+def setup():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    GPIO.setup(Pin.Ringing, GPIO.OUT)
+    GPIO.output(Pin.Ringing, 1)
 
-x = 0
-y = True
-ring = 10#in ms
-pause = 30#in ms
+    prepare()
+
+def prepare():
+    write_is_ringing(path)
 
 def is_ringing(path):
     #ToDo check if file exits
     with open(path, "r") as file:
        return file.readline(1) == "1"
 
-while(True):
-    y = is_ringing(path)
-    time.sleep(Timeout.Short)
-    GPIO.output(Pin.Ringing, 1)
-
-    while(y):
+def main():
+    x = 0
+    y = True
+    ring = 10#in ms
+    pause = 30#in ms
+    
+    while(True):
         y = is_ringing(path)
         time.sleep(Timeout.Short)
-        x += 1
-        #print(x)
-        if(x % (ring + pause) == ring):
-            #print('x')
-            GPIO.output(Pin.Ringing, 0)
-            print('Ring')
-        if(x % (ring + pause) == (pause - ring)):
-           #print('y')
-           GPIO.output(Pin.Ringing, 1)
-           print('No Ring')
-GPIO.output(Pin.Ringing, 1)
+        GPIO.output(Pin.Ringing, 1)
+
+        while(y):
+            y = is_ringing(path)
+            time.sleep(Timeout.Short)
+            x += 1
+            #print(x)
+            if(x % (ring + pause) == ring):
+                #print('x')
+                GPIO.output(Pin.Ringing, 0)
+                print('Ring')
+            if(x % (ring + pause) == (pause - ring)):
+                #print('y')
+                GPIO.output(Pin.Ringing, 1)
+                print('No Ring')
+    GPIO.output(Pin.Ringing, 1)
+
+if __name__ == '__main__':
+    setup()
+    main()
