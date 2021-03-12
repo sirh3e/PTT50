@@ -72,9 +72,7 @@ def call():
             main()
             #time.sleep(100)
 
-#endOfFunctions
-main()
-#listening
-
-    
-
+if __name__ == '__main__':
+    #endOfFunctions
+    main()
+    #listening
