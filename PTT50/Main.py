@@ -55,7 +55,7 @@ def call():
             if(GPIO.input(Pin.Pulse)):
                 time.sleep(0.02)
                 if(GPIO.input(Pin.Pulse) == 0):
-                    time.sleep(0.0)
+                    time.sleep(Timeout.NotAny)
                     x += 1
             if(GPIO.input(Pin.Calling) == 0 and x != 0):
                 x %= 10
