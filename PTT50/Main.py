@@ -5,14 +5,18 @@
 import RPi.GPIO as GPIO
 import time
 import os
+from enum import Enum
 
-
+class Pin(Enum):
+    Fork = 36 #Takt
+    Calling = 38 #Wählt
+    Pulse = 40 #Gabel
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-GPIO.setup(40, GPIO.IN)#Takt
-GPIO.setup(38, GPIO.IN)#Wählt
-GPIO.setup(36, GPIO.IN)#Gabel
+GPIO.setup(Pin.Pulse, GPIO.IN)
+GPIO.setup(Pin.Calling, GPIO.IN)
+GPIO.setup(Pin.Fork, GPIO.IN)
 
 #Globale Variablen
 x = 0
