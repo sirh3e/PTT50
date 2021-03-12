@@ -9,16 +9,17 @@ from enum import Enum
 from pin import Pin
 from timeout import Timeout
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(Pin.Pulse, GPIO.IN)
-GPIO.setup(Pin.Calling, GPIO.IN)
-GPIO.setup(Pin.Fork, GPIO.IN)
-
 #Globale Variablen
 x = 0
 y = ""
 z = 0
+
+def setup():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    GPIO.setup(Pin.Pulse, GPIO.IN)
+    GPIO.setup(Pin.Calling, GPIO.IN)
+    GPIO.setup(Pin.Fork, GPIO.IN)
 
 #functions
 def main():
@@ -74,5 +75,6 @@ def call():
 
 if __name__ == '__main__':
     #endOfFunctions
+    setup()
     main()
     #listening
