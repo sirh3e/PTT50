@@ -3,11 +3,12 @@
 import RPi.GPIO as GPIO
 import time
 import os
+from pin import Pin
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-GPIO.setup(32, GPIO.OUT)#Ringing
-GPIO.output(32, 1)
+GPIO.setup(Pin.Ringing, GPIO.OUT)
+GPIO.output(Pin.Ringing, 1)
 
 f = open("/home/pi/TwinklePTT50/ring.txt", "w")
 f.write("0")

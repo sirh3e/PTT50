@@ -6,11 +6,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 from enum import Enum
-
-class Pin(Enum):
-    Fork = 36 #Takt
-    Calling = 38 #Wählt
-    Pulse = 40 #Gabel
+from pin import Pin
 
 class Timeout(Enum):
     NotAny = 0.0
