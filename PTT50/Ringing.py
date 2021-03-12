@@ -11,26 +11,29 @@ GPIO.setwarnings(False)
 GPIO.setup(Pin.Ringing, GPIO.OUT)
 GPIO.output(Pin.Ringing, 1)
 
-f = open("/home/pi/TwinklePTT50/ring.txt", "w")
-f.write("0")
-f.close()
+path = "/home/pi/TwinklePTT50/ring.txt"
+
+with open(path, "w") as file:
+    file.write("0")
+    file.flush()
 
 x = 0
 y = True
 ring = 10#in ms
 pause = 30#in ms
 
+def is_ringing(path):
+    #ToDo check if file exits
+    with open(path, "r") as file:
+       return file.readline(1) == "1"
+
 while(True):
-    f = open("/home/pi/TwinklePTT50/ring.txt", "r")
-    y = (f.readline(1) == "1")
-    f.close()
+    y = is_ringing(path)
     time.sleep(Timeout.Short)
     GPIO.output(Pin.Ringing, 1)
 
     while(y):
-        f = open("/home/pi/TwinklePTT50/ring.txt", "r")
-        y = (f.readline(1) == "1")
-        f.close()
+        y = is_ringing(path)
         time.sleep(Timeout.Short)
         x += 1
         #print(x)
