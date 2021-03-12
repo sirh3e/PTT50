@@ -37,11 +37,11 @@ def listening():
     if(GPIO.input(Pin.Fork)):
         if(GPIO.input(Pin.Calling)):
             call()
-        time.sleep(0.01)
+        time.sleep(Timeout.Short)
         if(GPIO.input(Pin.Fork) == 0):
            os.system('twinkle --cmd bye')
     else:
-        time.sleep(0.01)
+        time.sleep(Timeout.Short)
         if(GPIO.input(Pin.Fork)):
             os.system('twinkle --cmd answer')
 
