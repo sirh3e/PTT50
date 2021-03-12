@@ -24,7 +24,7 @@ while(True):
     y = (f.readline(1) == "1")
     f.close()
     time.sleep(0.1)
-    GPIO.output(32, 1)
+    GPIO.output(Pin.Ringing, 1)
 
     while(y):
         f = open("/home/pi/TwinklePTT50/ring.txt", "r")
@@ -35,10 +35,10 @@ while(True):
         #print(x)
         if(x % (ring + pause) == ring):
             #print('x')
-            GPIO.output(32, 0)
+            GPIO.output(Pin.Ringing, 0)
             print('Ring')
         if(x % (ring + pause) == (pause - ring)):
            #print('y')
-           GPIO.output(32, 1)
+           GPIO.output(Pin.Ringing, 1)
            print('No Ring')
-GPIO.output(32, 1)
+GPIO.output(Pin.Ringing, 1)
