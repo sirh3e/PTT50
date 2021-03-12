@@ -45,12 +45,12 @@ def call():
     y = ""
     z = 0
     while(True):
-        while(GPIO.input(Pin.Calling) == 1):
+        while(GPIO.input(Pin.Calling)):
             z = 0
-            if(GPIO.input(Pin.Pulse) == 1):
+            if(GPIO.input(Pin.Pulse)):
                 time.sleep(0.02)
                 if(GPIO.input(Pin.Pulse) == 0):
-                    time.sleep(0.02)
+                    time.sleep(0.0)
                     x += 1
             if(GPIO.input(Pin.Calling) == 0 and x != 0):
                 x %= 10
