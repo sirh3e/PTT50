@@ -47,9 +47,9 @@ def call():
     while(True):
         while(GPIO.input(Pin.Calling) == 1):
             z = 0
-            if(GPIO.input(40) == 1):
+            if(GPIO.input(Pin.Pulse) == 1):
                 time.sleep(0.02)
-                if(GPIO.input(40) == 0):
+                if(GPIO.input(Pin.Pulse) == 0):
                     time.sleep(0.02)
                     x += 1
             if(GPIO.input(Pin.Calling) == 0 and x != 0):
