@@ -5,7 +5,7 @@ import time
 import os
 from pin import Pin
 from timeout import Timeout
-from utilities import write_is_ringing
+from utilities import read_from_file_is_not_ringing, write_is_ringing
 
 path = "/home/pi/TwinklePTT50/ring.txt"
 
@@ -20,11 +20,6 @@ def setup():
 def prepare():
     write_is_ringing(path)
 
-def is_ringing(path):
-    #ToDo check if file exits
-    with open(path, "r") as file:
-       return file.readline(1) == "1"
-
 def main():
     x = 0
     y = True
@@ -32,12 +27,12 @@ def main():
     pause = 30#in ms
     
     while(True):
-        y = is_ringing(path)
+        y = read_from_file_is_not_ringing(path)
         time.sleep(Timeout.Short)
         GPIO.output(Pin.Ringing, 1)
 
         while(y):
-            y = is_ringing(path)
+            y = read_from_file_is_not_ringing(path)
             time.sleep(Timeout.Short)
             x += 1
             #print(x)
