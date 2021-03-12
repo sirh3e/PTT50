@@ -1,5 +1,5 @@
 #!/usr/bin/python3
 
-f = open("/home/pi/TwinklePTT50/ring.txt", "w")
-f.write("1")
-f.close()
+with open("/home/pi/TwinklePTT50/ring.txt", "w") as file:
+    file.write("1")
+    file.flush()
